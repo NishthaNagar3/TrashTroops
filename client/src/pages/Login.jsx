@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
 import { GiThreeLeaves } from "react-icons/gi";
@@ -15,7 +15,6 @@ const Login = () => {
   const [errMsg, setErrMsg] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
-  //const history = useHistory();
 
   const {
     register,
@@ -37,7 +36,6 @@ const Login = () => {
         setErrMsg(res);
       }else{
         setErrMsg("");
-
         const newData = {token:res?.token, ...res?.user};
         dispatch(UserLogin(newData));
         window.location.replcae("/");
@@ -108,7 +106,7 @@ const Login = () => {
             {errMsg?.message && (
               <span
                 className={`text-sm ${
-                  errMsg?.status == "failed"
+                  errMsg?.status === "failed"
                     ? "text-[#f64949fe]"
                     : "text-[#2ba150fe]"
                 } mt-0.5`}

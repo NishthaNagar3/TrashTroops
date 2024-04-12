@@ -34,7 +34,7 @@ export const handleFileUpload = async(uploadFile) => {
 
     try{
         const response = await axios.post(
-            `https://api.cloudinary.com/v1_1/${duvi34mpv}/image/upload/`,
+            `https://api.cloudinary.com/v1_1/${process.env.duvi34mpv}/image/upload/`,
             formData
         );
         return response.data.secure_url;
@@ -54,8 +54,8 @@ export const fetchPosts = async(token, dispatch, uri, data)=>{
         });
         dispatch(SetPosts(res?.data));
         return;
-    } catch (err) {
-        console.log(err);
+    } catch (error) {
+        console.log(error);
     }
 };
 
@@ -69,7 +69,7 @@ export const likePost = async({uri, token}) => {
 
         return res;
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 };
 
@@ -81,15 +81,14 @@ export const deletePost = async({id, token}) => {
             method : "DELETE",
         });
         return;
-        return res;
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 };
 
 export const getUserInfo = async(token,id) => {
     try {
-        const url = id === undefined? "/users/get-user" : "/users/get-user/" +id;
+        const uri = id === undefined? "/users/get-user" : "/users/get-user/" +id;
         const res = await apiRequest({
             url : uri, 
             token : token,
@@ -102,34 +101,34 @@ export const getUserInfo = async(token,id) => {
         }
         return res?.user;
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 };
 
-export const senFriendRequest = async(token, id) => {
-    try {
-        const res = await apiRequest({
-            url : "/users/friend-request",
-            token : token,
-            method : "POST",
-            data : {requestTo: id},
-        });
-        return;
-    } catch (error) {
-        console.log(err);
-    }
-};
+// export const senFriendRequest = async(token, id) => {
+//     try {
+//         const res = await apiRequest({
+//             url : "/users/friend-request",
+//             token : token,
+//             method : "POST",
+//             data : {requestTo: id},
+//         });
+//         return;
+//     } catch (error) {
+//         console.log(err);
+//     }
+// };
 
-export const viewUserProfile = async(token, id) => {
-    try {
-        const res = await apiRequest({
-            url :"/users/profile-view",
-            token : token,
-            method : "POST",
-            data : {id},
-        });
-        return;
-    } catch (error) {
-        console.log(err);
-    }
-};
+// export const viewUserProfile = async(token, id) => {
+//     try {
+//         const res = await apiRequest({
+//             url :"/users/profile-view",
+//             token : token,
+//             method : "POST",
+//             data : {id},
+//         });
+//         return;
+//     } catch (error) {
+//         console.log(err);
+//     }
+// };
