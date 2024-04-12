@@ -39,7 +39,7 @@ export const handleFileUpload = async(uploadFile) => {
         );
         return response.data.secure_url;
     }catch (err){
-        console.log(error);
+        console.log(err);
 
     }
 };
@@ -54,7 +54,7 @@ export const fetchPosts = async(token, dispatch, uri, data)=>{
         });
         dispatch(SetPosts(res?.data));
         return;
-    } catch (error) {
+    } catch (err) {
         console.log(err);
     }
 };
